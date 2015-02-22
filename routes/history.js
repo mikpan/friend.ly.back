@@ -2,17 +2,17 @@ var MongoClient = require('mongodb').MongoClient,
     Server = require('mongodb').Server,
     db;
 
-//var mongoClient = new MongoClient(new Server('149.210.145.186', 27017));
-var mongoClient = new MongoClient(new Server('127.0.0.1', 27017));
-mongoClient.open(function(err, mongoClient) {
-    db = mongoClient.db("historydb");
-    db.collection('history', {strict:true}, function(err, collection) {
+var MONGODB_URI = 'mongodb://heroku_app34252694:5m5hrb6s14e0vu784vb018bh5i@ds047581.mongolab.com:47581/heroku_app34252694';
+
+// Initialize connection once
+MongoClient.connect(MONGODB_URI, function(err, database) {
+  if(err) throw err;
+  db = database;
+  db.collection('history', {strict:true}, function(err, collection) {
         if (err) {
             console.log("The 'history' collection doesn't exist. Creating it with sample data...");
         }
-    });
 });
-
 
 // Utility function - get client IP address from request object TODO: move to utility module
 getIp = function (request) {
