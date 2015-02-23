@@ -12,6 +12,7 @@ MongoClient.connect(MONGODB_URI, function(err, database) {
         if (err) {
             console.log("The 'history' collection doesn't exist. Creating it with sample data...");
         }
+  });
 });
 
 // Utility function - get client IP address from request object TODO: move to utility module
