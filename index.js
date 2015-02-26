@@ -28,7 +28,7 @@ app.get('/history/latest/:id', history.getLatestStamp);
 app.get('/history/all/property/:property', history.getAllProperties);
 
 app.post('/logs/', logs.flush);
-
+app.get('/logs/', logs.showAll);
 
 app.listen(nconf.get('PORT'));
 console.log('Listening on port ' + nconf.get('PORT') + '...');

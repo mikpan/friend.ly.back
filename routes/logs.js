@@ -38,3 +38,21 @@ exports.flush = function(req, res) {
             });
     });
 };
+
+exports.showAll = function(req, res) {
+    var level = req.query["level"];
+    console.log('findAll(' + name + ') -- find all log items for the given level.');
+    db.collection('history', function(err, collection) {
+        if (name) {
+            collection.find({"level": new RegExp(name, "i")}).toArray(function(err, items) {
+                console.log('==> ' + ((items && items.length) ? items.length : 0) + ' items found.');
+                res.jsonp(items);
+            });
+        } else {
+            collection.find().toArray(function(err, items) {
+                console.log('==> ' + ((items && items.length) ? items.length : 0) + ' items found.');
+                res.jsonp(items);
+            });
+        }
+    });
+};
