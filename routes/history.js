@@ -1,11 +1,10 @@
 var MongoClient = require('mongodb').MongoClient,
-    Server = require('mongodb').Server,
-    db;
+    nconf = require('nconf');
 
-var MONGODB_URI = 'mongodb://heroku_app34252694:5m5hrb6s14e0vu784vb018bh5i@ds047581.mongolab.com:47581/heroku_app34252694';
+var db;
 
 // Initialize connection once
-MongoClient.connect(MONGODB_URI, function(err, database) {
+MongoClient.connect(nconf.get('MONGODB_URI'), function(err, database) {
   if(err) throw err;
   db = database;
   db.collection('history', {strict:true}, function(err, collection) {
@@ -121,16 +120,16 @@ exports.countAll = function(req, res) {
     });
 };
 
-appendIpAddress = function(historyItems, ip) {
-    console.log ('appendIpAddress(itemsCount=' + (historyItems.length ? historyItems.length : '0') + ', ip=' + ip + ')');
-    for (var i=0; historyItems.length && i<historyItems.length; i++) {
-        historyItems[i]['ip'] = ip;
+appendAttribute = function (items, attributeName, attributeValue) {
+    console.log ('appendAttribute(itemsCount=' + (items.length ? items.length : '0') + ', [' + attributeName +']=' + attributeValue + ')');
+    for (var i=0; items.length && i<items.length; i++) {
+        items[i][attributeName] = attributeValue;
     }
 };
 
 exports.push = function(req, res) {
 	console.log ('push(request.body.length=' + req.body.length + ') -- push new history items.');
-    appendIpAddress(req.body, getIp(req));
+    appendAttribute(req.body, "ip", getIp(req));
 	db.collection('history', function(err, collection) {
 		collection.insert(req.body, {safe:true}, 
 		function(err, result) {

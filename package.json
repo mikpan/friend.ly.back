@@ -1,15 +1,16 @@
 {
-    "name": "friend.ly",
-    "description": "Friend.ly history aggregator",
-    "version": "0.0.2",
-    "private": true,
-    "main": "index.js",
-    "dependencies": {
-        "express": "= 3.2.0",
-        "mongodb": ">= 1.3.19"
-	},
-    "scripts": {
-   	"start": "node index.js"
-    },
-    "license": "MIT"
+  "name": "friend.ly",
+  "description": "Friend.ly history aggregator",
+  "version": "0.0.2",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "express": "= 3.2.0",
+    "mongodb": ">= 1.3.19",
+    "nconf": "^0.7.1"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "MIT"
 }
