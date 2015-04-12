@@ -32,7 +32,7 @@ exports.findById = function(req, res) {
 };
 
 exports.findByBrowser = function(req, res) {
-    var id = parseInt(req.params['id']);
+    var id = req.params['id'];
     console.log('findByBrowserId(' + id + ') -- get history item by its browser ID.');
     db.collection('history', function(err, collection) {
         collection.find({'chromeId': id}).toArray(function(err, items) {
