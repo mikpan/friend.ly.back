@@ -25,7 +25,6 @@ exports.findById = function(req, res) {
     console.log('findById(' + id + ') -- get history item by its local ID. Return first one, if several.');
     db.collection('history', function(err, collection) {
         collection.findOne({'id': id}, function(err, item) {
-            console.log('==> Found item: ' + item);
             res.jsonp(item);
         });
     });
@@ -36,7 +35,6 @@ exports.findByBrowser = function(req, res) {
     console.log('findByBrowserId(' + id + ') -- get history item by its browser ID.');
     db.collection('history', function(err, collection) {
         collection.find({'chromeId': id}).toArray(function(err, items) {
-            console.log(items);
             res.jsonp(items);
         });
     });
