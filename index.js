@@ -12,11 +12,6 @@ var express = require('express'),
     history = require('./routes/history');
     logs = require('./routes/logs');
 
-//configure CORS
-var corsOptions = {
-    origin: 'http://localhost:3000'
-};
-
 var app = express();
 app.configure(function () {
     app.use(express.bodyParser());
